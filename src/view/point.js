@@ -1,4 +1,4 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 import { humanizeDate, humanizeTime, getDifference } from '../utils';
 
 const createPointTemplate = (point, currentOffers, currentDesctination) => {
@@ -9,41 +9,31 @@ const createPointTemplate = (point, currentOffers, currentDesctination) => {
     dateTo,
     isFavorite,
     offers} = point;
-
   const date = dateFrom !== null
     ? humanizeDate(dateFrom, 'D MMMM')
     : 'June 9';
-
   const favoriteClassName = isFavorite
     ? 'event__favorite-btn--active'
     : '';
-
   const timeFrom = dateFrom !== null
     ? humanizeTime(dateFrom)
     : '10:00';
-
   const timeTo = dateTo !== null
     ? humanizeTime(dateTo)
     : '11:00';
-
   const formattingDate = (diffDate) => diffDate < 10? `0${diffDate}`: `${diffDate}`;
-
   const calculateTimeSpent = () => {
     const differenceDays = formattingDate(getDifference(dateFrom, dateTo, 'day'));
     const differenceHours = formattingDate(getDifference(dateFrom, dateTo, 'hour') - differenceDays * 24);
     const differenceMinute = formattingDate(getDifference(dateFrom, dateTo, 'minute') - differenceDays * 24 * 60 - differenceHours * 60 + 1);
-
     if (differenceDays !== '00') {
       return `${differenceDays}D ${differenceHours}H ${differenceMinute}M`;
     }
-
     if (differenceHours !== '00') {
       return `${differenceHours}H ${differenceMinute}M`;
     }
-
     return `${differenceMinute}M`;
   };
-
   const getTemplateOffer = (offer) => {
     if (offers.find((x) => x === offer['id'])) {
       return(
@@ -54,13 +44,10 @@ const createPointTemplate = (point, currentOffers, currentDesctination) => {
             </li>`);
     }
   };
-
   const createOffersElement = () => {
     const offersView = currentOffers.map(getTemplateOffer);
-
     return offersView.join(' ');
   };
-
   return (
     `<li class="trip-events__item">
     <div class="event">
@@ -95,26 +82,26 @@ const createPointTemplate = (point, currentOffers, currentDesctination) => {
   </li>`
   );};
 
-class PointView {
+class PointView extends AbstractView {
   constructor(point, offers, destination) {
+    super()
     this.point = point;
     this.offers = offers;
     this.destination = destination;
   }
 
-  get _template() {
+  get template() {
     return createPointTemplate(this.point, this.offers, this.destination);
   }
 
-  get element() {
-    if(!this._element) {
-      this._element = createElement(this._template);
-    }
-    return this._element;
+  setEditClickHandler = (callback) => {
+    this._callback.click = callback
+    this.element.addEventListener('click', this._editClickHandler);
   }
 
-  removeElement() {
-    this._element = null;
+  _editClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.click();
   }
 }
 

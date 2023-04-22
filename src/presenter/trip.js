@@ -5,6 +5,7 @@ import NewPointView from '../view/new-point';
 import SortView from '../view/sort';
 import TripListView from '../view/trip-list';
 import FirstMessageView from '../view/first-message';
+import generateSorting from '../fish-data/sorting';
 
 class TripPresenter {
   constructor(container, pointsModel) {
@@ -13,21 +14,23 @@ class TripPresenter {
     this._pointsModel = pointsModel;
     this._listPoints = [];
   }
+
   init() {
     this._listPoints = this._pointsModel.points;
     this._renderTrip();
   }
+
   _renderTrip() {
     if (this._listPoints.length === 0) {
       render(new FirstMessageView(), this._container);
     }
     else {
-      render(new SortView(), this._container);
+      const sorting = generateSorting(this._pointsModel.points)
+      render(new SortView(sorting), this._container);
       render(this._tripListComponent, this._container);
 
       render(new NewPointView(this._pointsModel.getOffers(),
         this._pointsModel.getDestination()), this._tripListComponent.element);
-
       for (let i = 0; i < this._listPoints.length; i++) {
         const currentPoint = this._listPoints[i];
         const curretnOffers = this._pointsModel.getOffers(currentPoint);
@@ -36,10 +39,10 @@ class TripPresenter {
       }
     }
   }
+
   _renderPoint(point, offers, destination) {
     const pointComponent = new PointView(point, offers, destination);
     const pointEditComponent = new EditPointView(point, offers, destination);
-
     const replacePointToForm = () => {
       replace(pointEditComponent, pointComponent);
     };

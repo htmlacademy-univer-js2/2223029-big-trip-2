@@ -5,7 +5,6 @@ const CITIES = [
   'Paris',
   'Milan'
 ];
-
 const DESCRIPTIONS = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   'Cras aliquet varius magna, non porta ligula feugiat eget.',
@@ -18,7 +17,6 @@ const DESCRIPTIONS = [
   'Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.',
   'In rutrum ac purus sit amet tempus.'
 ];
-
 const TITLES_OFFER = [
   'Add a child safety seat',
   'Stay overnight',
@@ -30,7 +28,6 @@ const TITLES_OFFER = [
   'Use the translator service',
   'Upgrade to a business class'
 ];
-
 const TYPES_POINT = [
   'taxi',
   'bus',
@@ -45,10 +42,34 @@ const TYPES_POINT = [
 
 const COUNT_POINT = 20;
 
+const FILTERS_TYPE = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PAST: 'past'
+}
+
+const FITERS_MESSAGE = {
+  EVERYTHING: 'Click New Event to create your first point',
+  FUTURE: 'There are no future events now',
+  PAST: 'There are no past events now'
+}
+
+const SORTED_TYPE = {
+  DAY: 'day',
+  EVENT: 'event',
+  TIME: 'time',
+  PRICE: 'price',
+  OFFERS: 'offers'
+}
+
+
 export {
   CITIES,
   TITLES_OFFER,
   DESCRIPTIONS,
   TYPES_POINT,
-  COUNT_POINT
+  COUNT_POINT,
+  FILTERS_TYPE,
+  FITERS_MESSAGE,
+  SORTED_TYPE
 };

@@ -9,18 +9,23 @@ const createPointTemplate = (point, currentOffers, currentDesctination) => {
     dateTo,
     isFavorite,
     offers} = point;
+
   const date = dateFrom !== null
     ? humanizeDate(dateFrom, 'D MMMM')
     : 'June 9';
+
   const favoriteClassName = isFavorite
     ? 'event__favorite-btn--active'
     : '';
+
   const timeFrom = dateFrom !== null
     ? humanizeTime(dateFrom)
     : '10:00';
+
   const timeTo = dateTo !== null
     ? humanizeTime(dateTo)
     : '11:00';
+
   const formattingDate = (diffDate) => diffDate < 10? `0${diffDate}`: `${diffDate}`;
   const calculateTimeSpent = () => {
     const differenceDays = formattingDate(getDifference(dateFrom, dateTo, 'day'));
@@ -34,6 +39,7 @@ const createPointTemplate = (point, currentOffers, currentDesctination) => {
     }
     return `${differenceMinute}M`;
   };
+
   const getTemplateOffer = (offer) => {
     if (offers.find((x) => x === offer['id'])) {
       return(
@@ -44,10 +50,12 @@ const createPointTemplate = (point, currentOffers, currentDesctination) => {
             </li>`);
     }
   };
+
   const createOffersElement = () => {
     const offersView = currentOffers.map(getTemplateOffer);
     return offersView.join(' ');
   };
+
   return (
     `<li class="trip-events__item">
     <div class="event">

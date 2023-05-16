@@ -27,16 +27,20 @@ const createPointTemplate = (point, currentOffers, currentDesctination) => {
     : '11:00';
 
   const formattingDate = (diffDate) => diffDate < 10? `0${diffDate}`: `${diffDate}`;
+
   const calculateTimeSpent = () => {
     const differenceDays = formattingDate(getDifference(dateFrom, dateTo, 'day'));
     const differenceHours = formattingDate(getDifference(dateFrom, dateTo, 'hour') - differenceDays * 24);
     const differenceMinute = formattingDate(getDifference(dateFrom, dateTo, 'minute') - differenceDays * 24 * 60 - differenceHours * 60 + 1);
+
     if (differenceDays !== '00') {
       return `${differenceDays}D ${differenceHours}H ${differenceMinute}M`;
     }
+
     if (differenceHours !== '00') {
       return `${differenceHours}H ${differenceMinute}M`;
     }
+
     return `${differenceMinute}M`;
   };
 
@@ -104,12 +108,22 @@ class PointView extends AbstractView {
 
   setEditClickHandler = (callback) => {
     this._callback.click = callback
-    this.element.addEventListener('click', this._editClickHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this._editClickHandler);
+  }
+
+  setFavoriteClickHandler = (callback) => {
+    this._callback.favoriteClick = callback
+    this.element.querySelector('.event__favorite-btn').addEventListener('click', this._favoriteClickHandler);
   }
 
   _editClickHandler = (evt) => {
     evt.preventDefault();
     this._callback.click();
+  }
+
+  _favoriteClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.favoriteClick();
   }
 }
 

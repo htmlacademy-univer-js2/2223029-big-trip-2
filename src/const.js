@@ -5,6 +5,7 @@ const CITIES = [
   'Paris',
   'Milan'
 ];
+
 const DESCRIPTIONS = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   'Cras aliquet varius magna, non porta ligula feugiat eget.',
@@ -17,6 +18,7 @@ const DESCRIPTIONS = [
   'Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus.',
   'In rutrum ac purus sit amet tempus.'
 ];
+
 const TITLES_OFFER = [
   'Add a child safety seat',
   'Stay overnight',
@@ -28,6 +30,7 @@ const TITLES_OFFER = [
   'Use the translator service',
   'Upgrade to a business class'
 ];
+
 const TYPES_POINT = [
   'taxi',
   'bus',

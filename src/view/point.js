@@ -57,6 +57,7 @@ const createPointTemplate = (point, currentOffers, currentDesctination) => {
 
   const createOffersElement = () => {
     const offersView = currentOffers.map(getTemplateOffer);
+
     return offersView.join(' ');
   };
 

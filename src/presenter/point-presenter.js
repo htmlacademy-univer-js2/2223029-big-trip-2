@@ -31,13 +31,9 @@ class PointPresenter {
     this._destination = this._pointsModel.getDestination(this._point)
     this._pointComponent = new PointView(this._point, this._offers, this._destination);
     this._pointEditComponent = new EditPointView(this._point, this._offers, this._destination);
-
     this._pointComponent.setFavoriteClickHandler(this._handleFavoriteClick)
-
     this._pointComponent.setEditClickHandler(this._handleEditSubmitClick)
-
     this._pointEditComponent.setFormSubmitHandler(this._handleFormSubmitClick);
-
     this._pointEditComponent.setButtonClickHandler(this._handleButtonlick);
 
     if (prevPointComponent == null || prevPointEditComponent === null) {
@@ -64,6 +60,7 @@ class PointPresenter {
 
   resetView = () => {
     if (this._mode !== Mode.DEFAULT) {
+      this._pointEditComponent.reset(this._point)
       this._replaceFormToPoint()
     }
   }
@@ -82,6 +79,7 @@ class PointPresenter {
   _onEscKeyDown = (evt) => {
     if (evt.key === 'Escape' || evt.key === 'Esc') {
       evt.preventDefault();
+      this._pointEditComponent.reset(this._point)
       this._replaceFormToPoint();
       document.removeEventListener('keydown', this._onEscKeyDown);
     }
@@ -96,13 +94,14 @@ class PointPresenter {
     this._changeData({...this._point, isFavorite: !this._point.isFavorite})
   };
 
-  _handleFormSubmitClick = () => {
+  _handleFormSubmitClick = (point) => {
     this._replaceFormToPoint()
-    this._changeData(this._point)
+    this._changeData(point)
     document.removeEventListener('keydown', this._onEscKeyDown);
   }
 
   _handleButtonlick = () => {
+    this._pointEditComponent.reset(this._point)
     this._replaceFormToPoint()
     document.removeEventListener('keydown', this._onEscKeyDown)
   }

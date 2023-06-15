@@ -184,7 +184,7 @@ const createNewPointTemplate = (allOffers, allDestination, point = {}) => {
 
 class NewPointView extends AbstractView {
   constructor(offers, destination, point) {
-    super()
+    super();
     this._point = point;
     this._offers = offers;
     this._destination = destination;

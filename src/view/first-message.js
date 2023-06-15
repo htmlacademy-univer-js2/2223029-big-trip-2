@@ -1,4 +1,4 @@
-import AbstractView from "../framework/view/abstract-view";
+import AbstractView from '../framework/view/abstract-view';
 
 const createFirstMessageTeplate = (message) => (
   `<p class="trip-events__msg">${message}</p>`
@@ -6,7 +6,7 @@ const createFirstMessageTeplate = (message) => (
 
 class FirstMessageView extends AbstractView {
   constructor() {
-    super()
+    super();
     this._message = 'Click New Event to create your first point';
   }
 

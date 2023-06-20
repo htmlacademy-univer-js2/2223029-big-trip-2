@@ -9,23 +9,18 @@ import FilterPresenter from './presenter/filter-presenter';
 import PointsApiService from './api-services/points-api-service';
 import OffersApiService from './api-services/offers-api-service';
 import DestinationsApiService from './api-services/destination-api-service';
-
 const AUTHORIZATION = 'Basic hsdhdnbmfklvsdkebndi';
 const END_POINT = 'https://18.ecmascript.pages.academy/big-trip';
-
 const filtersContainerElement = document.querySelector('.trip-controls__filters');
 const newPointContainerElement = document.querySelector('.trip-main')
 const tripContainerElement = document.querySelector('.trip-events');
-
 const pointsModel = new PointsModel(new PointsApiService(END_POINT, AUTHORIZATION));
 const offersModel = new OffersModel(new OffersApiService(END_POINT, AUTHORIZATION));
 const destinationsModel = new DestinationsModel(new DestinationsApiService(END_POINT, AUTHORIZATION))
 const filterModel = new FiltersModel();
 const newPointButtonComponent = new NewPointButtonView();
-
 const tripPresenter = new TripPresenter(tripContainerElement, pointsModel, offersModel, destinationsModel, filterModel);
 const filterPresenter = new FilterPresenter(filtersContainerElement, filterModel, pointsModel)
-
 const handleNewPointFormClose = () => {
   newPointButtonComponent.element.disabled = false;
 };
@@ -35,6 +30,8 @@ const handleNewPointButtonClick = () => {
   newPointButtonComponent.element.disabled = true;
 };
 
+filterPresenter.init();
+tripPresenter.init();
 offersModel.init().finally(() => {
   destinationsModel.init().finally(() => {
     pointsModel.init().finally(() => {
@@ -43,6 +40,3 @@ offersModel.init().finally(() => {
     });
   });
 });
-
-filterPresenter.init();
-tripPresenter.init();

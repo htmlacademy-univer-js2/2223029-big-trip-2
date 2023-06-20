@@ -10,19 +10,19 @@ const TYPES_POINT = [
   'restaurant'
 ];
 
-const FILTERS_TYPE = {
+const FiltersType = {
   EVERYTHING: 'everything',
   FUTURE: 'future',
   PAST: 'past'
 };
 
-const FILTERS_MESSAGE = {
+const FiltersMessage = {
   everything: 'Click New Event to create your first point',
   future: 'There are no future events now',
   past: 'There are no past events now'
 };
 
-const SORTED_TYPE = {
+const SortedType = {
   DAY: 'day',
   EVENT: 'event',
   TIME: 'time',
@@ -46,13 +46,15 @@ const UpdateType = {
 const Method = {
   GET: 'GET',
   PUT: 'PUT',
+  POST: 'POST',
+  DELETE: 'DELETE'
 };
 
 export {
   TYPES_POINT,
-  FILTERS_TYPE,
-  FILTERS_MESSAGE,
-  SORTED_TYPE,
+  FiltersType,
+  FiltersMessage,
+  SortedType,
   UserAction,
   UpdateType,
   Method

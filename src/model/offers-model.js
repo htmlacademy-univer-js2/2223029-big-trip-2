@@ -1,20 +1,20 @@
 import Observable from '../framework/observable.js';
 
-class OffersModel extends Observable{
+class OffersModel extends Observable {
   constructor(offersApiService) {
     super();
     this._offersApiService = offersApiService;
-    this._offers = []
-  };
+    this._offers = [];
+  }
 
   get offers() {
     return this._offers;
-  };
+  }
 
   init = async () => {
     try {
       this._offers = await this._offersApiService.offers;
-    } catch(err) {
+    } catch (err) {
       this._offers = [];
     }
   };

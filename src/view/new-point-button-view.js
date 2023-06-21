@@ -1,14 +1,23 @@
-import AbstractView from "../framework/view/abstract-view";
+import AbstractView from '../framework/view/abstract-view.js';
 
-const createTripListTemplate = () => (
-  `<ul class="trip-events__list">
-  </ul>`
-);
+function createNewPointButtonTemplate() {
+  return '<button class="trip-main__event-add-btn  btn  btn--big  btn--yellow" type="button">New event</button>';
+}
 
-class TripListView extends AbstractView {
+class NewPointButtonView extends AbstractView {
   get template() {
-    return createTripListTemplate();
+    return createNewPointButtonTemplate();
+  }
+
+  setClickHandler = (callback) => {
+    this._callback.click = callback;
+    this.element.addEventListener('click', this._clickHandler);
+  };
+
+  _clickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.click();
   };
 }
 
-export default TripListView;
+export default NewPointButtonView;

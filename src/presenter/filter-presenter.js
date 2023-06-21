@@ -1,7 +1,7 @@
-import { remove, render, replace } from "../framework/render";
-import FiltersView from "../view/filters-view";
-import { filters } from "../utils";
-import { UpdateType, FiltersType } from "../const";
+import {remove, render, replace} from '../framework/render';
+import FiltersView from '../view/filters-view';
+import {filters} from '../utils';
+import {FiltersType, UpdateType} from '../const';
 
 class FilterPresenter {
   constructor(filterContainer, filterModel, pointsModel) {
@@ -12,7 +12,7 @@ class FilterPresenter {
 
     this._pointsModel.addObserver(this._handleModelEvent);
     this._filterModel.addObserver(this._handleModelEvent);
-  };
+  }
 
   get filters() {
     const points = this._pointsModel.points;
@@ -33,14 +33,15 @@ class FilterPresenter {
         name: 'past',
         count: filters[FiltersType.PAST](points).length
       }
-    ]
-  };
+    ];
+  }
 
   init = () => {
-    const filters = this.filters;
     const prevFilterComponent = this._filterComponent;
-    this._filterComponent = new FiltersView(filters, this._filterModel.filter);
+
+    this._filterComponent = new FiltersView(this.filters, this._filterModel.filter);
     this._filterComponent.setFilterTypeChangeHandler(this._handleFilterTypeChange);
+
     if (prevFilterComponent === null) {
       render(this._filterComponent, this._filterContainer);
       return;
